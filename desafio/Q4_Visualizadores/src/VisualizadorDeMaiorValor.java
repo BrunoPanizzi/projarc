@@ -1,10 +1,10 @@
 import java.util.List;
 
-public class VisualizadorDeMedia implements Observador {
+public class VisualizadorDeMaiorValor implements Observador {
     private FonteDeDados fonte;
     private boolean ligado;
 
-    public VisualizadorDeMedia(FonteDeDados fonte) {
+    public VisualizadorDeMaiorValor(FonteDeDados fonte) {
         this.fonte = fonte;
         this.ligado = false; 
     }
@@ -13,7 +13,7 @@ public class VisualizadorDeMedia implements Observador {
         if (!ligado) {
             this.fonte.adicionarObservador(this);
             ligado = true;
-            System.out.println("Visualizador de Média ligado.");
+            System.out.println("Visualizador de Maior Valor ligado.");
         }
     }
 
@@ -21,21 +21,20 @@ public class VisualizadorDeMedia implements Observador {
         if (ligado) {
             this.fonte.removerObservador(this);
             ligado = false;
-            System.out.println("Visualizador de Média desligado.");
+            System.out.println("Visualizador de Maior Valor desligado.");
         }
     }
 
     @Override
     public void atualizar() {
-        exibeMedia();
+        exibeMaiorValor();
     }
 
-    public void exibeMedia() {
+    public void exibeMaiorValor() {
         List<Integer> valores = fonte.getValores();
-        double media = valores.stream()
-            .mapToInt(Integer::intValue)
-            .average()
-            .orElse(0.0);
-        System.out.println("Média: " + media + ", quantidade de elementos analisados: " + valores.size());
+        Integer maior = valores.stream()
+            .max(Integer::compareTo)
+            .orElse(0);
+        System.out.println("Maior valor: " + maior);
     }
 }
