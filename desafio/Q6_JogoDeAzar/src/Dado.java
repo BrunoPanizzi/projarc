@@ -1,20 +1,5 @@
-import java.util.Random;
+public interface Dado {
+    public void rolar();
 
-public class Dado {
-    private int lados;
-    private int valorJogada;
-    private final Random random;
-
-    public Dado(int lados) {
-        this.lados = lados;
-        this.random = new Random();
-    }
-
-    public void rolar() {
-        valorJogada = random.nextInt(lados) + 1;
-    }
-
-    public int getValor() {
-        return valorJogada;
-    }
+    public int getValor();
 }
